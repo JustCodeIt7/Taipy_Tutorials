@@ -1,0 +1,24 @@
+[JOB]
+mode = "standalone"
+max_nb_of_workers = 5
+
+[DATA_NODE.sales_history]
+storage_type="csv"
+default_path="./path/to/my/file.csv"
+[SCENARIO.SCENARIO_1]
+additional_data_nodes = [ ]
+tasks = [ "TASK_1:SECTION" ]
+
+[TASK.TASK_1]
+inputs = [ "sales_history:SECTION", "DATA_NODE_1:SECTION" ]
+outputs = [ "DATA_NODE_2:SECTION" ]
+function = "Taipy_Series.01_Understanding_GUI.01_First_Web_Page.functions.plan:function"
+skippable = "False:bool"
+
+[DATA_NODE.DATA_NODE_1]
+storage_type = "pickle"
+scope = "SCENARIO:SCOPE"
+
+[DATA_NODE.DATA_NODE_2]
+storage_type = "pickle"
+scope = "SCENARIO:SCOPE"
